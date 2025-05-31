@@ -1,4 +1,5 @@
 import { ChildProps } from '@/types'
+import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import { FC } from 'react'
@@ -17,9 +18,21 @@ const montserrat = Montserrat({
 const RootLayout: FC<ChildProps> = ({ children }) => {
 	return (
 		<html lang='en'>
-			<body className={`${montserrat.className} bg-dark-2 antialiased`}>
-				<main>{children}</main>
-			</body>
+			<ClerkProvider
+				appearance={{
+					variables: {
+						colorText: '#fff',
+						colorPrimary: '#0E78F9',
+						colorBackground: '#1c1f2e',
+						colorInputBackground: '#252a41',
+						colorInputText: '#fff',
+					},
+				}}
+			>
+				<body className={`${montserrat.className} bg-dark-2 antialiased`}>
+					<main>{children}</main>
+				</body>
+			</ClerkProvider>
 		</html>
 	)
 }
